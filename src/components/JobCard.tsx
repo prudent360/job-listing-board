@@ -17,6 +17,10 @@ export interface JobCardData {
   tags: string[];
 }
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export default function JobCard({ job }: { job: JobCardData }) {
   return (
     <Link
@@ -54,7 +58,7 @@ export default function JobCard({ job }: { job: JobCardData }) {
           </div>
 
           <p className="mt-2 text-sm line-clamp-2" style={{ color: "var(--muted)" }}>
-            {job.description}
+            {stripHtml(job.description)}
           </p>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
