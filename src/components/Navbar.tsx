@@ -2,8 +2,10 @@
 
 import { useTheme } from "./ThemeProvider";
 import { useAuth } from "./AuthProvider";
+import { useSiteSettings } from "./SiteSettingsProvider";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const ADMIN_ROLES = ["SUPER_ADMIN", "ADMIN", "STAFF"];
 
@@ -17,6 +19,7 @@ const navLinks = [
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { user, logout, loading } = useAuth();
+  const { settings } = useSiteSettings();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -46,8 +49,11 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link href="/" className="text-xl font-bold" style={{ color: "var(--accent)" }}>
-              Reekruitr
+            <Link href="/" className="flex items-center gap-2 text-xl font-bold" style={{ color: "var(--accent)" }}>
+              {settings.logoUrl ? (
+                <Image src={settings.logoUrl} alt={settings.siteName} width={32} height={32} className="h-8 w-8 rounded-lg object-contain" />
+              ) : null}
+              {settings.siteName}
             </Link>
             <div className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
