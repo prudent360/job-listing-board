@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  password     String
+  firstName    String        @map("first_name")
+  lastName     String        @map("last_name")
+  role         String        @default("JOB_SEEKER")
+  isActive     Boolean       @default(true) @map("is_active")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  jobs         Job[]
+  applications Application[]
+
+  @@map("users")
+}
+
+model Job {
+  id           Int           @id @default(autoincrement())
+  title        String
+  slug         String        @unique
+  company      String
+  location     String
+  type         String        @default("Full-time")
+  salary       String
+  category     String
+  description      String
+  tags             String   @default("")
+  status           String   @default("PENDING")
+  externalApplyUrl String?  @map("external_apply_url")
+  postedById   Int           @map("posted_by_id")
+  postedBy     User          @relation(fields: [postedById], references: [id])
+  approvedById Int?          @map("approved_by_id")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  applications Application[]
+
+  @@map("jobs")
+}
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  jobId     Int      @map("job_id")
+  job       Job      @relation(fields: [jobId], references: [id])
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  coverNote String   @default("") @map("cover_note")
+  status    String   @default("SUBMITTED")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([jobId, userId])
+  @@map("applications")
+}

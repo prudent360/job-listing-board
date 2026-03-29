@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "jobs" ADD COLUMN "external_apply_url" TEXT;
