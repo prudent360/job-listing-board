@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Remote", href: "/?location=Remote" },
   { label: "US", href: "/?location=US" },
   { label: "UK", href: "/?location=UK" },
+  { label: "Resume", href: "/resume" },
 ];
 
 export default function Navbar() {

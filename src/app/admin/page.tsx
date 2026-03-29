@@ -190,7 +190,13 @@ export default function AdminDashboard() {
                         className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold"
                         style={{ backgroundColor: sc.bg, color: sc.text }}
                       >
-                        {job.status === "APPROVED" ? "✓" : job.status === "PENDING" ? "⏳" : "✕"}
+                        {job.status === "APPROVED" ? (
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        ) : job.status === "PENDING" ? (
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        ) : (
+                          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        )}
                       </div>
                       <div className="min-w-0">
                         <p className="text-sm font-medium truncate">{job.title}</p>
