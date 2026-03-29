@@ -22,7 +22,7 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold">For Employers</h3>
             <ul className="mt-3 space-y-2">
-              <li><Link href="/login" className="text-sm hover:opacity-80" style={{ color: "var(--muted)" }}>Post a Job</Link></li>
+              <li><Link href="/post-a-job" className="text-sm hover:opacity-80" style={{ color: "var(--muted)" }}>Post a Job</Link></li>
               <li><Link href="/login" className="text-sm hover:opacity-80" style={{ color: "var(--muted)" }}>Manage Listings</Link></li>
             </ul>
           </div>

@@ -33,7 +33,7 @@ export default function Navbar() {
 
   const initials = user ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase() : "";
   const isAdmin = user && ADMIN_ROLES.includes(user.role);
-  const postJobHref = isAdmin ? "/admin/jobs" : "/login";
+  const postJobHref = isAdmin ? "/admin/jobs" : "/post-a-job";
 
   return (
     <nav
@@ -119,6 +119,14 @@ export default function Navbar() {
                             {user.role.replace("_", " ")}
                           </span>
                         </div>
+                        <Link
+                          href="/profile"
+                          onClick={() => setDropdownOpen(false)}
+                          className="block w-full px-4 py-2.5 text-sm hover:opacity-80"
+                          style={{ color: "var(--foreground)" }}
+                        >
+                          Profile
+                        </Link>
                         {isAdmin && (
                           <Link
                             href="/admin"
